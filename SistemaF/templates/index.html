@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
+</head>
+<body>
+    {% block cuerpo %}
+    <h1>Listado de Employees</h1>
+    <table>
+        <thead>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>No. Empleado</th>
+            <th>Opciones</th>
+        </thead>
+        <tbody>
+            {% for i in personas  %}
+            <tr>
+                <td>{{personas.first_name}}</td>
+                <td>{{personas.last_name}}</td>
+                <td>{{personas.emp_no}}</td>
+                <td><a href="">Editar </a> <a href="">Eliminar</a></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    {% endblock cuerpo %}
+</body>
+</html>
