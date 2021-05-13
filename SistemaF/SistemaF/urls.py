@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from SistemaF.aplicaciones.principal.views import inicio,crearPersona,editarEmpleado,eliminarEmpleado
-from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrear,EmpleadoUpdate
+from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrear,EmpleadoUpdate,EmpleadoDelete
 
 #from SistemaF.views import despedida
 
@@ -25,5 +25,5 @@ urlpatterns = [
     path('',EmpleadoList.as_view(),name='index'),
     path('crearEmpleado/',EmpleadoCrear.as_view(),name='crearEmpleado'),
     path('editarEmpleado/<int:pk>/',EmpleadoUpdate.as_view(),name='editarEmpleado'),
-    path('eliminarEmpleado/<int:emp_no>',eliminarEmpleado,name='eliminarEmpleado'),
+    path('eliminarEmpleado/<int:pk>',EmpleadoDelete.as_view(),name='eliminarEmpleado'),
 ]

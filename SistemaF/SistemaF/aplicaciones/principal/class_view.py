@@ -19,3 +19,8 @@ class EmpleadoUpdate(UpdateView):
     form_class = EmpleadoForms
     template_name = 'crearEmpleado.html'
     success_url = reverse_lazy('index')
+
+class EmpleadoDelete(DeleteView):
+    model = Employees
+    template_name = 'verificacion.html'
+    success_url=reverse_lazy('index')
