@@ -1,3 +1,4 @@
+from threading import ExceptHookArgs
 from django.forms.forms import Form
 from django.shortcuts import redirect, render
 from .models import Employees
@@ -28,10 +29,15 @@ def crearPersona(request):
     return render(request,'crearEmpleado.html',contexto)
 
 def editarEmpleado(request,emp_no):
-    empleado = Employees.objects.get(emp_no=emp_no)
+    empleado = Employees.objects.get(emp_no = emp_no)
     if request.method=='GET':
         form = EmpleadoForms(instance=empleado)
         contexto={
             'form':form
         }
+    else:
+        form= EmpleadoForms(request.POST, instance=empleado)
+        if form.is_valid():
+            form.save
+            return redirect('index')
     return render(request,'crearEmpleado.html',contexto)
