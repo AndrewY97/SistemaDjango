@@ -37,7 +37,15 @@ def editarEmpleado(request,emp_no):
         }
     else:
         form= EmpleadoForms(request.POST, instance=empleado)
+        contexto={
+            'form':form
+        }
         if form.is_valid():
             form.save
             return redirect('index')
     return render(request,'crearEmpleado.html',contexto)
+
+def eliminarEmpleado(request,emp_no):
+    empleado = Employees.objects.get(emp_no=emp_no)
+    empleado.delete()
+    return redirect('index')

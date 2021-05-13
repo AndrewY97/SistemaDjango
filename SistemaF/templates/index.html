@@ -8,6 +8,20 @@
     <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Empleados</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Features</a>
+            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link disabled" href="#">Disabled</a>
+          </div>
+        </div>
+      </nav>
     {% block cuerpo %}
     <h1>Listado de Empleados</h1>
     <table class="table">
@@ -20,14 +34,14 @@
           </tr>
         </thead>
         <tbody>
-            {% for personas in personas  %}
-            <tr>
-                <td>{{personas.emp_no}}</td>
-                <td>{{personas.first_name}}</td>
-                <td>{{personas.last_name}}</td>
-                <td><a href="{% url 'editarEmpleado' personas.emp_no %}">Editar </a> <a href=""> Eliminar</a></td>
-            </tr>
-            {%endfor%}
+          {% for personas in personas %}
+          <tr>
+            <td>{{personas.emp_no}}</td>
+            <td>{{personas.first_name}}</td>
+            <td>{{personas.last_name}}</td>
+            <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a></td>
+        </tr>
+          {% endfor %}
         </tbody>
       </table>
     {% endblock cuerpo %}
