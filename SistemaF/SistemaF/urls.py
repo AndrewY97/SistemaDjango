@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from SistemaF.aplicaciones.principal.views import inicio,crearPersona,editarEmpleado,eliminarEmpleado
-from SistemaF.aplicaciones.principal.class_view import EmpleadoList
+from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrear,EmpleadoUpdate
 
 #from SistemaF.views import despedida
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',EmpleadoList.as_view(),name='index'),
-    path('crearEmpleado/',crearPersona,name='crearEmpleado'),
-    path('editarEmpleado/<int:emp_no>/',editarEmpleado,name='editarEmpleado'),
+    path('crearEmpleado/',EmpleadoCrear.as_view(),name='crearEmpleado'),
+    path('editarEmpleado/<int:pk>/',EmpleadoUpdate.as_view(),name='editarEmpleado'),
     path('eliminarEmpleado/<int:emp_no>',eliminarEmpleado,name='eliminarEmpleado'),
 ]
