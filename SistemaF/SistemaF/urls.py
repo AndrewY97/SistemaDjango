@@ -18,12 +18,13 @@ from django.urls import path
 from django.contrib.auth import login,logout
 from SistemaF.aplicaciones.principal.views import inicio,crearPersona,editarEmpleado,eliminarEmpleado
 from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrear,EmpleadoUpdate,EmpleadoDelete
+from SistemaF.aplicaciones.usuarios.views import Login
 
 #from SistemaF.views import despedida
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',login, name='login'),
+    path('',Login.as_view(),name='login'),
     path('principal/',EmpleadoList.as_view(),name='index'),
     path('crearEmpleado/',EmpleadoCrear.as_view(),name='crearEmpleado'),
     path('editarEmpleado/<int:pk>/',EmpleadoUpdate.as_view(),name='editarEmpleado'),
