@@ -1,3 +1,5 @@
+from django.http import request
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -13,6 +15,13 @@ class Login(FormView):
 
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
+
+    def dispatch(self,*args,**kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(Login,self).dispatch(request,*args,**kwargs)
+
 
 
     
