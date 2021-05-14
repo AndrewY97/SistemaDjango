@@ -23,7 +23,7 @@ from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrea
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',l,name='log'),
+    path('',login, name='login'),
     path('principal/',EmpleadoList.as_view(),name='index'),
     path('crearEmpleado/',EmpleadoCrear.as_view(),name='crearEmpleado'),
     path('editarEmpleado/<int:pk>/',EmpleadoUpdate.as_view(),name='editarEmpleado'),
