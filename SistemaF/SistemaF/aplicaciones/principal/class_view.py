@@ -5,8 +5,17 @@ from .forms import EmpleadoForms
 from .models import Employees
 
 class EmpleadoList(ListView):
-    model = Employees
-    template_name = 'index.html'
+    template_name='index.html'
+    queryset= Employees.objects.all().order_by('emp_no')
+    paginate_by = 50
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message']='Listado de Empleados'
+
+        return context
+
+    
 
 class EmpleadoCrear(CreateView):
     model = Employees

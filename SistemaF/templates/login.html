@@ -1,29 +1,121 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <title>Login</title>
+   <style type="text/css">
+      body {
+         font-family: "Lato", sans-serif;
+      }
 
-<div class="sidenav">
-         <div class="login-main-text">
-            <h2>Application<br> Login Page</h2>
-            <p>Login or register from here to access.</p>
-         </div>
+
+
+      .main-head{
+         height: 150px;
+         background: #FFF;
+         
+      }
+
+      .sidenav {
+         height: 100%;
+         background-color: #000;
+         overflow-x: hidden;
+         padding-top: 20px;
+      }
+
+
+      .main {
+         padding: 0px 10px;
+      }
+
+      @media screen and (max-height: 450px) {
+         .sidenav {padding-top: 15px;}
+      }
+
+      @media screen and (max-width: 450px) {
+         .login-form{
+            margin-top: 10%;
+         }
+
+         .register-form{
+            margin-top: 10%;
+         }
+      }
+
+      @media screen and (min-width: 768px){
+         .main{
+            margin-left: 40%; 
+         }
+
+         .sidenav{
+            width: 40%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+         }
+
+         .login-form{
+            margin-top: 80%;
+         }
+
+         .register-form{
+            margin-top: 20%;
+         }
+      }
+
+
+      .login-main-text{
+         margin-top: 20%;
+         padding: 60px;
+         color: #fff;
+      }
+
+      .login-main-text h2{
+         font-weight: 300;
+      }
+
+   </style>
+</head>
+<body>
+   <div class="sidenav">
+      <div class="login-main-text">
+         <h2>Sistema de Empleados<br> Login</h2>
+         <p>Inicia Sesion para acceder</p>
       </div>
-      <div class="main">
-         <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-               <form>
-                  <div class="form-group">
-                     <label>User Name</label>
-                     <input type="text" class="form-control" placeholder="User Name">
-                  </div>
-                  <div class="form-group">
-                     <label>Password</label>
-                     <input type="password" class="form-control" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-black">Login</button>
-                  <button type="submit" class="btn btn-secondary">Register</button>
-               </form>
-            </div>
-         </div>
+   </div>
+   <div class="main">
+      <div class="col-md-6 col-sm-12">
+         <div class="login-form">
+            <form method="POST">
+              {% csrf_token %}
+                <div class="form-group">
+                  {% if form.error_messages %}
+                      <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss = "alert" aria-label = "Close">
+                          <span aria-hidden = "true">&times;</span>
+                        </button>
+                        <strong>Advertencia: </strong> {{ form.get_invalid_login_error }}
+                      </div>
+                  {% endif %}
+                    <label>Nombre de usuario</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Iniciar Sesión</button>
+            </form>
+        </div>
       </div>
+   </div>
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
