@@ -1,8 +1,10 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,DeleteView,ListView,UpdateView
 from .forms import EmpleadoForms
 from .models import Employees
+from django.db.models import Q
 
 class EmpleadoList(ListView):
     template_name='index.html'
@@ -14,8 +16,6 @@ class EmpleadoList(ListView):
         context['message']='Listado de Empleados'
 
         return context
-
-    
 
 class EmpleadoCrear(CreateView):
     model = Employees
@@ -33,3 +33,16 @@ class EmpleadoDelete(DeleteView):
     model = Employees
     template_name = 'verificacion.html'
     success_url=reverse_lazy('index')
+
+def busqueda(request):
+    template_name='index.html'
+    queryset=request.GET("buscar")
+    post= Employees.objects.filtrer(estado=True)
+    if queryset:
+        post=Employees.objects.filter(
+            Q(emp_no_icontains=queryset) |
+            Q(first_name_icontains=queryset)
+        ).distinct()
+    return render(request,'index.html',{'post':post})
+
+
