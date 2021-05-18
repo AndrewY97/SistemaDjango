@@ -1,3 +1,4 @@
+from re import template
 from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
@@ -14,8 +15,15 @@ class EmpleadoList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['message']='Listado de Empleados'
-
         return context
+    #Empleado=Employees.objects.filter()
+
+def buscar(request):
+    print(request.GET)
+    #queryset= request.GET.get("buscar")
+    empleados=Employees.objects.filter(emp_no=True)
+    return render(request,'index.html',{'empleados':empleados})
+    
 
 class EmpleadoCrear(CreateView):
     model = Employees
@@ -33,16 +41,5 @@ class EmpleadoDelete(DeleteView):
     model = Employees
     template_name = 'verificacion.html'
     success_url=reverse_lazy('index')
-
-def busqueda(request):
-    template_name='index.html'
-    queryset=request.GET("buscar")
-    post= Employees.objects.filtrer(estado=True)
-    if queryset:
-        post=Employees.objects.filter(
-            Q(emp_no_icontains=queryset) |
-            Q(first_name_icontains=queryset)
-        ).distinct()
-    return render(request,'index.html',{'post':post})
 
 

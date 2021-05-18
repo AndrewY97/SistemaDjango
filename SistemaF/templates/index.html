@@ -19,17 +19,19 @@
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'crearEmpleado' %}">Crear Empleado<span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'index' %}">Listado de Empleados</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Empleados
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'index' %}">Listar</a>
+            <a class="dropdown-item" href="{% url 'index2' %}">Buscar</a>
+          </div>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'logout'%}">Logout</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" method="GET">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" name="buscar" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
     {% block cuerpo %}

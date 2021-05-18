@@ -27,8 +27,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',Login.as_view(),name='login'),
     path('principal/', login_required(EmpleadoList.as_view()),name='index'),
+    path('principall/', login_required(inicio),name='index2'),
     path('crearEmpleado/',login_required(EmpleadoCrear.as_view()),name='crearEmpleado'),
     path('editarEmpleado/<int:pk>/',login_required(EmpleadoUpdate.as_view()),name='editarEmpleado'),
     path('eliminarEmpleado/<int:pk>',login_required(EmpleadoDelete.as_view()),name='eliminarEmpleado'),
     path('logout/',login_required(salir),name='logout'),
+    #path('busqueda/',buscar,name='busqueda')
 ]

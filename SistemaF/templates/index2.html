@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Sistema</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'crearEmpleado' %}">Crear Empleado<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}">Listado de Empleados</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+        </li>
+      </ul>
+      <form  class="form-inline my-2 my-lg-0" method="GET">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" name="buscar" aria-label="Search">
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+    {% block cuerpo %}
+    <h1>Listado de Empleados</h1>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">No. Empleado</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for personas in empleados %}
+            {% if personas == null%}
+                <h1>No hay datos existentes!!!!!</h1>
+            {% endif %}
+        <tr>
+          <td>{{personas.emp_no}}</td>
+          <td>{{personas.first_name}}</td>
+          <td>{{personas.last_name}}</td>
+          <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if is_paginated %}
+    <div class="mt-2">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+          </li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+          {% if page.obj_number == i %}
+          <li class="page-item active">
+            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+          </li>
+          {% else %}
+          <li class="page-item">
+            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+          </li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif%}
+    {% endblock cuerpo %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
