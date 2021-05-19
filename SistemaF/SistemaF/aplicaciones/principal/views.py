@@ -2,11 +2,13 @@ from threading import ExceptHookArgs
 from django.core import paginator
 from django.db.models import query
 from django.forms.forms import Form
-from django.shortcuts import redirect, render
+from django.http import response
+from django.shortcuts import redirect, render, HttpResponse
 from .models import Employees,DeptEmp,Departments
 from .forms import EmpleadoForms
 from django.core.paginator import Paginator
 from django.db.models import Q
+
 
 
 def inicio(request):
@@ -62,5 +64,47 @@ def eliminarEmpleado(request,emp_no):
     empleado.delete()
     return redirect('index')
 
-def pdf(self,pk=None):
-    import io
+def categoria_print(self, pk=None):  
+    import io  
+    from django.conf import settings
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle  
+    from reportlab.lib.styles import getSampleStyleSheet  
+    from reportlab.lib import colors  
+    from reportlab.lib.pagesizes import letter  
+    from reportlab.platypus import Table  
+
+    response = HttpResponse(content_type='application/pdf')  
+    buff = io.BytesIO()  
+    doc = SimpleDocTemplate(buff,  
+                pagesize=letter,  
+                rightMargin=40,  
+                leftMargin=40,  
+                topMargin=60,  
+                bottomMargin=18,  
+                )  
+    categorias = []  
+    styles = getSampleStyleSheet()  
+    header = Paragraph("Listado de Empleados", styles['Heading1'])  
+    categorias.append(header)  
+    headings = ('No.Emp', 'Nombre', 'Apellidos', 'Genero')  
+    if not pk:  
+        todascategorias = [(p.id, p.descripcion, p.activo, p.creado)  
+                for p in Employees.objects.all().order_by('pk')]  
+    else:  
+        todascategorias = [(p.emp_no, p.first_name, p.last_name, p.gender)  
+                for p in Employees.objects.filter(emp_no=pk)]   
+    t = Table([headings] + todascategorias)  
+    t.setStyle(TableStyle(  
+        [  
+        ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),  
+        ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),  
+        ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)  
+        ]  
+    ))  
+
+    categorias.append(t)  
+    doc.build(categorias)  
+    response.write(buff.getvalue())  
+    buff.close()  
+    return response 
+

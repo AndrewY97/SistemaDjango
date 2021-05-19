@@ -53,7 +53,7 @@
           <td>{{personas.first_name}}</td>
           <td>{{personas.last_name}}</td>
           <td>{{personas.gender}}</td>
-          <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a><a href=""> Generar PDF</a> </td>
+          <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a><a href="{% url 'categoria_print_one' personas.emp_no%}"> Generar PDF</a> </td>
         </tr>
         {% endfor %}
       </tbody>
