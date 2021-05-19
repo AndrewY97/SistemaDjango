@@ -8,7 +8,7 @@
     <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Sistema</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
         </li>
       </ul>
       <form  class="form-inline my-2 my-lg-0" method="GET">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" name="buscar" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar Empleado" name="buscar" aria-label="Search">
         <button type="submit">Buscar</button>
       </form>
     </div>
@@ -40,6 +40,7 @@
           <th scope="col">No. Empleado</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
+          <th scope="col">Genero</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
@@ -52,6 +53,7 @@
           <td>{{personas.emp_no}}</td>
           <td>{{personas.first_name}}</td>
           <td>{{personas.last_name}}</td>
+          <td>{{personas.deptemp}}</td>
           <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a></td>
         </tr>
         {% endfor %}
