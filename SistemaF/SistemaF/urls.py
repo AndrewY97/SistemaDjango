@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
-from SistemaF.aplicaciones.principal.views import inicio,crearPersona,editarEmpleado,eliminarEmpleado,categoria_print
+from SistemaF.aplicaciones.principal.views import inicio,crearPersona,editarEmpleado,eliminarEmpleado
 from SistemaF.aplicaciones.principal.class_view import EmpleadoList,EmpleadoCrear,EmpleadoUpdate,EmpleadoDelete,ReportePDF
 from SistemaF.aplicaciones.usuarios.views import Login, salir
 
@@ -32,6 +32,5 @@ urlpatterns = [
     path('editarEmpleado/<int:pk>/',login_required(EmpleadoUpdate.as_view()),name='editarEmpleado'),
     path('eliminarEmpleado/<int:pk>',login_required(EmpleadoDelete.as_view()),name='eliminarEmpleado'),
     path('logout/',login_required(salir),name='logout'),
-     path('categorias/print/<int:pk>', categoria_print, name='categoria_print_one'),  
     #path('busqueda/',buscar,name='busqueda')
 ]

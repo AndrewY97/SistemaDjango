@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
+    <style type="text/css">
+      h1 {
+          text-align: center;
+          font-weight: normal;
+          font-size: 45px;
+          font-family: 'Segoe UI';
+          text-transform: uppercase;
+          font-weight: 500;
+      }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Sistema</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,28 +46,30 @@
   </nav>
     {% block cuerpo %}
     <h1>Listado de Empleados</h1>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">No. Empleado</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellido</th>
-          <th scope="col">Genero</th>
-          <th scope="col">Opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for personas in object_list %}
-        <tr>
-          <td>{{personas.emp_no}}</td>
-          <td>{{personas.first_name}}</td>
-          <td>{{personas.last_name}}</td>
-          <td>{{personas.gender}}</td>
-          <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}"> Eliminar</a><a href="{% url 'categoria_print_one' personas.emp_no%}"> Generar PDF</a> </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="container">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">No. Empleado</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Genero</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for personas in object_list %}
+          <tr>
+            <td>{{personas.emp_no}}</td>
+            <td>{{personas.first_name}}</td>
+            <td>{{personas.last_name}}</td>
+            <td>{{personas.gender}}</td>
+            <td><a href="{% url 'editarEmpleado' personas.emp_no %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Editar</a> <a href="{% url 'eliminarEmpleado' personas.emp_no %}" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Elimina</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     {% if is_paginated %}
     <div class="mt-2">
       <ul class="pagination">

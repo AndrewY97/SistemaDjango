@@ -1,13 +1,42 @@
 {% extends 'index.html'%}
-{% block titulo %}Formulario de Empleados{% endblock titulo %}
-{% block cuerpo %}
-<h1>Formulario Empleados</h1>
+{% load crispy_forms_tags %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">CREAR</button>
-</form> 
+{% block titulo %}Formulario de Empleados{% endblock titulo %}
+
+{% block cuerpo %}
+<style type="text/css">
+    h1 {
+        text-align: center;
+        font-weight: normal;
+        font-size: 45px;
+        font-family: 'Segoe UI';
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+</style>
+<h1>Formulario Empleados</h1>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{form.emp_no|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.gender|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.first_name|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.last_name|as_crispy_field}}
+            </div>
+        </div>
+        {{form.birth_date|as_crispy_field}}
+        {{form.hire_date|as_crispy_field}}
+        <button type="submit" class="btn btn-outline-success">Agregar Empleado</button>
+    </form> 
+</div>
 
 
 {% endblock cuerpo %}

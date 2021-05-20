@@ -42,7 +42,7 @@ class EmpleadoCrear(CreateView):
 class EmpleadoUpdate(UpdateView):
     model = Employees
     form_class = EmpleadoForms
-    template_name = 'crearEmpleado.html'
+    template_name = 'actualizarEmpleado.html'
     success_url = reverse_lazy('index')
 
 class EmpleadoDelete(DeleteView):
