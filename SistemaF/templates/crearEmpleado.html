@@ -5,17 +5,26 @@
 
 {% block cuerpo %}
 <style type="text/css">
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: #E6E6E6;
+    }
     h1 {
         text-align: center;
         font-weight: normal;
         font-size: 45px;
-        font-family: 'Segoe UI';
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         text-transform: uppercase;
         font-weight: 500;
     }
+    .container {
+        font-weight: bold;
+        width: 600px;
+        border-style: solid;
+    }
 </style>
 <h1>Formulario Empleados</h1>
-<div class="container">
+<div class="container border">
     <form method="POST">
         {% csrf_token %}
         <div class="row">
@@ -31,10 +40,15 @@
             <div class="col-6">
                 {{form.last_name|as_crispy_field}}
             </div>
+            <div class="col-6">
+                {{form.birth_date|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.hire_date|as_crispy_field}}
+            </div>
         </div>
-        {{form.birth_date|as_crispy_field}}
-        {{form.hire_date|as_crispy_field}}
         <button type="submit" class="btn btn-outline-success">Agregar Empleado</button>
+       
     </form> 
 </div>
 

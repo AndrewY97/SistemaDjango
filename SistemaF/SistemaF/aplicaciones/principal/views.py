@@ -37,7 +37,9 @@ def crearPersona(request):
         if form.is_valid():
             form.save()
             return redirect('index')
+        contexto['form'] = form
     return render(request,'crearEmpleado.html',contexto)
+    
 
 def editarEmpleado(request,emp_no):
     empleado = Employees.objects.get(emp_no = emp_no)

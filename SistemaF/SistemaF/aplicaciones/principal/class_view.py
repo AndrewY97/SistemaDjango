@@ -13,7 +13,9 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Paragraph
 from reportlab.lib.units import cm
 from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet  
+from reportlab.lib.styles import getSampleStyleSheet 
+from django import forms
+ 
 
 class EmpleadoList(ListView):
     template_name='index.html'
@@ -38,6 +40,7 @@ class EmpleadoCrear(CreateView):
     form_class = EmpleadoForms
     template_name = 'crearEmpleado.html'
     success_url = reverse_lazy('index')
+
 
 class EmpleadoUpdate(UpdateView):
     model = Employees

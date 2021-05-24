@@ -1,13 +1,48 @@
 {% extends 'index.html'%}
-{% block titulo %}Formulario de Empleados{% endblock titulo %}
+{% load crispy_forms_tags %}
+{% block titulo %}Actualizar {{object}}{% endblock titulo %}
 {% block cuerpo %}
-<h1>Formulario Empleados</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="btn btn-outline-success">Actualizar Empleado</button>
-</form> 
+<h1>Actualizar Empleado: {{object}}</h1>
+<style type="text/css">
+    .container {
+        width: 600px;
+        font-weight: bold;
+        border-color:#A4A4A4 ;
+    }
+    #un {
+        font-weight: bold;
+    }
+    
+</style>
+<script>
+    document.getElementById("emp_no").disabled = true;
+</script>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div  id="emp_no" class="col-6">
+                {{form.emp_no|as_crispy_field}}
+            </div>
+            <div  id="un" class="col-6">
+                {{form.gender|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.first_name|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.last_name|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.birth_date|as_crispy_field}}
+            </div>
+            <div class="col-6">
+                {{form.hire_date|as_crispy_field}}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success">Actualizar Empleado</button>
+    </form> 
+</div>
 
 
 {% endblock cuerpo %}

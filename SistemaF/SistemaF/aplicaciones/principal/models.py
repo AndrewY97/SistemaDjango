@@ -8,6 +8,8 @@
 #!/usr/bin/python
 #-*- coding: utf - 8 -*-
 from django.db import models
+from django import forms
+from django.forms import widgets
 
 
 class AuthGroup(models.Model):
@@ -173,9 +175,12 @@ class Employees(models.Model):
     class Meta:
         managed = False
         db_table = 'employees'
+
     
     def __str__(self):
         return self.first_name
+    
+
 
 
 class EmployeesPartitionEmpNo(models.Model):

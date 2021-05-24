@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>{%block titulo%}Lista de Empleados{%endblock titulo%}</title>
     <style type="text/css">
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: #E6E6E6;
+      }
       h1 {
           text-align: center;
           font-weight: normal;
           font-size: 45px;
-          font-family: 'Segoe UI';
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
           text-transform: uppercase;
           font-weight: 500;
       }
+      .logout {
+          background-color: red;
+      }
+    
   </style>
 </head>
 <body>
@@ -38,17 +46,17 @@
             <a class="dropdown-item" href="{% url 'index2' %}">Buscar</a>
           </div>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'logout'%}">Logout</a>
-        </li>
       </ul>
+      <form >
+          <a id="logout" class="nav-link" href="{% url 'logout'%}">Logout</a>
+      </form>
     </div>
   </nav>
     {% block cuerpo %}
     <h1>Listado de Empleados</h1>
     <div class="container">
       <table class="table">
-        <thead class="thead-dark">
+        <thead class=" table-striped thead-dark">
           <tr>
             <th scope="col">No. Empleado</th>
             <th scope="col">Nombre</th>
