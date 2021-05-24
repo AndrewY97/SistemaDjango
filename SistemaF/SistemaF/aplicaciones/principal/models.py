@@ -14,6 +14,7 @@ from django.forms import widgets
 from django.core.validators import RegexValidator
 
 only_string=RegexValidator(r'^[A-Za-z ]*$', 'Error, Sólo letras en este campo.')
+only_numbers=RegexValidator(r'^[0-9]*$', 'Error, Sólo numeros y positivos.')
 
 
 class AuthGroup(models.Model):
@@ -170,7 +171,7 @@ class DjangoSession(models.Model):
 
 
 class Employees(models.Model):
-    emp_no = models.IntegerField(primary_key=True)
+    emp_no = models.IntegerField(primary_key=True,validators=[only_numbers])
     birth_date = models.DateField()
     first_name = models.CharField(max_length=14,validators=[only_string])
     last_name = models.CharField(max_length=16,validators=[only_string])

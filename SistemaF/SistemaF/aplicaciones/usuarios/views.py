@@ -1,5 +1,3 @@
-from django.forms import forms
-from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -29,7 +27,7 @@ class Login(FormView):
 
 def salir(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/accounts/login/')
 
 
     
