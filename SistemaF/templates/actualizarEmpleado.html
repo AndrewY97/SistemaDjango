@@ -12,16 +12,21 @@
     #un {
         font-weight: bold;
     }
+    #emp_no {
+        pointer-events: none;
+    }
     
 </style>
-<script>
-    document.getElementById("emp_no").disabled = true;
+<script type="text/javascript">
+    function disable(){
+        var x = document.getElementById("emp_no").disabled=true;
+    }
 </script>
 <div class="container">
     <form method="POST">
         {% csrf_token %}
         <div class="row">
-            <div  id="emp_no" class="col-6">
+            <div  id="emp_no" class="col-6" aria-disabled="true">
                 {{form.emp_no|as_crispy_field}}
             </div>
             <div  id="un" class="col-6">
