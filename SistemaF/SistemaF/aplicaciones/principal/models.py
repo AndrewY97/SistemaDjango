@@ -7,9 +7,13 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 #!/usr/bin/python
 #-*- coding: utf - 8 -*-
+from django.core import validators
 from django.db import models
 from django import forms
 from django.forms import widgets
+from django.core.validators import RegexValidator
+
+only_string=RegexValidator(r'^[A-Za-z ]*$', 'Error, Sólo letras en este campo.')
 
 
 class AuthGroup(models.Model):
@@ -105,7 +109,8 @@ class DeptEmp(models.Model):
     class Meta:
         managed = False
         db_table = 'dept_emp'
-        unique_together = (('emp_no', 'dept_no'),)
+        unique_together = (('emp_no', 'dept_no'),
+        )
 
 
 class DeptManager(models.Model):
@@ -167,8 +172,8 @@ class DjangoSession(models.Model):
 class Employees(models.Model):
     emp_no = models.IntegerField(primary_key=True)
     birth_date = models.DateField()
-    first_name = models.CharField(max_length=14)
-    last_name = models.CharField(max_length=16)
+    first_name = models.CharField(max_length=14,validators=[only_string])
+    last_name = models.CharField(max_length=16,validators=[only_string])
     gender = models.CharField(max_length=1)
     hire_date = models.DateField()
 
