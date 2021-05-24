@@ -13,6 +13,12 @@ class EmpleadoForms(forms.ModelForm):
     def clean_gender(self):
         gender=self.cleaned_data['gender']
         l=['M',"F","f","m"]
-        if "M" and "F" and "f" and "m" not in gender:
-            raise forms.ValidationError("Campo Gender Erroneo, Solo admite M or F")
+        if gender != "M" and gender!= "F" and gender!="f" and gender !="m":
+            raise forms.ValidationError("Campo Erroneo, Sólo admite M or F")
         return gender
+    
+    def clean_first_name(self):
+        fn=self.cleaned_data['first_name']
+        if fn == "0" and fn == "1" and fn == "2" and fn == "3" and fn == "4" and fn == "5" and fn != "6":
+            raise forms.ValidationError("Campo Erroneo, Sóllo se admiten LETRAS")
+        return fn
